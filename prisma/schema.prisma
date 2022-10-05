@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Year {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  year Int
+
+  models Model[]
+}
+
+model Make {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name String
+
+  models Model[]
+}
+
+model Model {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name String
+
+  yearId Int?
+  year   Year? @relation(fields: [yearId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  makeId Int?
+  make   Make? @relation(fields: [makeId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
