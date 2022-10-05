@@ -3,21 +3,21 @@ services:
   dev-db:
     image: postgres:13
     ports:
-      - 5434:5432
+      - 5432:5432
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: crudFeature123
-      POSTGRES_DB: crudFeature
+      POSTGRES_PASSWORD: crud123
+      POSTGRES_DB: crudFeatureOne
     networks:
       - devnetwork
   test-db:
     image: postgres:13
     ports:
-      - 5435:5432
+      - 5433:5432
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: crudFeature123
-      POSTGRES_DB: crudFeatureTest
+      POSTGRES_PASSWORD: crud123
+      POSTGRES_DB: crudFeatureOneTest
     networks:
       - devnetwork
 networks:
