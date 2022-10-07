@@ -37,8 +37,7 @@ model Model {
 
   name String
 
-  yearId Int?
-  year   Year? @relation(fields: [yearId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  years Year []
 
   makeId Int?
   make   Make? @relation(fields: [makeId], references: [id], onDelete: Cascade, onUpdate: Cascade)

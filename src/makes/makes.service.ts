@@ -4,7 +4,7 @@ import { PrismaService } from '../prisma.service';
 
 @Injectable()
 export class MakesService {
-  constructor(private prisma: PrismaService){}
+  constructor(private prisma: PrismaService) { }
 
   create(createMakeDto: Prisma.MakeCreateInput) {
     return this.prisma.make.create({
@@ -34,4 +34,21 @@ export class MakesService {
       where
     })
   }
+
+  findOneWithModels(makeId: Prisma.MakeWhereUniqueInput) {
+    return this.prisma.make.findFirst({
+      where: makeId,
+      select: {
+        id: true,
+        name: true,
+        models: {
+          select: {
+            id: true,
+            name: true
+          }
+        }
+      }
+    })
+  }
+
 }

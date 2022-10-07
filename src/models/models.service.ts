@@ -15,15 +15,18 @@ export class ModelsService {
   findAll() {
     return this.prisma.model.findMany({
       select: {
+        id: true,
         name: true,
-        year: {
-          select: {
-            year: true
-          }
-        },
         make: {
           select: {
+            id: true,
             name: true
+          }
+        },
+        years: {
+          select: {
+            id: true,
+            year: true
           }
         }
       }
@@ -34,15 +37,18 @@ export class ModelsService {
     return this.prisma.model.findFirst({
       where: modelId,
       select: {
+        id: true,
         name: true,
-        year: {
-          select: {
-            year: true
-          }
-        },
         make: {
           select: {
+            id: true,
             name: true
+          }
+        },
+        years: {
+          select: {
+            id: true,
+            year: true
           }
         }
       }

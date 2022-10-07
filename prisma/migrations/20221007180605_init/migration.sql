@@ -24,14 +24,28 @@ CREATE TABLE "Model" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "name" TEXT NOT NULL,
-    "yearId" INTEGER,
     "makeId" INTEGER,
 
     CONSTRAINT "Model_pkey" PRIMARY KEY ("id")
 );
 
--- AddForeignKey
-ALTER TABLE "Model" ADD CONSTRAINT "Model_yearId_fkey" FOREIGN KEY ("yearId") REFERENCES "Year"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+-- CreateTable
+CREATE TABLE "_ModelToYear" (
+    "A" INTEGER NOT NULL,
+    "B" INTEGER NOT NULL
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX "_ModelToYear_AB_unique" ON "_ModelToYear"("A", "B");
+
+-- CreateIndex
+CREATE INDEX "_ModelToYear_B_index" ON "_ModelToYear"("B");
 
 -- AddForeignKey
 ALTER TABLE "Model" ADD CONSTRAINT "Model_makeId_fkey" FOREIGN KEY ("makeId") REFERENCES "Make"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_ModelToYear" ADD CONSTRAINT "_ModelToYear_A_fkey" FOREIGN KEY ("A") REFERENCES "Model"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_ModelToYear" ADD CONSTRAINT "_ModelToYear_B_fkey" FOREIGN KEY ("B") REFERENCES "Year"("id") ON DELETE CASCADE ON UPDATE CASCADE;

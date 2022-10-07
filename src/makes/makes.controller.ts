@@ -24,6 +24,11 @@ export class MakesController {
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.makesService.findOne({ id });
   }
+  
+  @Get('/models/:id')
+  findOneWithModels(@Param('id', ParseIntPipe) id: number) {
+    return this.makesService.findOneWithModels({ id });
+  }
 
   @Patch(':id')
   update(@Param('id', ParseIntPipe) id: number, @Body() updateMakeDto: UpdateMakeDto) {
